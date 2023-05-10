@@ -1,0 +1,61 @@
+Node:
+    Attributs:
+        - int id
+        - Point point
+        - ArrayList<Arc> successors
+    Methodes:
+        - Arc linkNodes
+        - void addSuccessor
+        - int getId
+        - int getNumberOfSuccessors
+        - boolean hasSuccessors
+        - List<Arc> getSuccessors 
+        - Point getPoint
+        - boolean equals
+        - int compareTo
+
+Arc:
+    Methodes:
+        - Node getOrigin
+        - Node getDestination
+        - float getLenght
+        - double getTravelTime
+        - double getMinimumTravelTime
+        - RoadInformation getRoadInformation
+        - List<Point> getPoints
+
+Path:
+    Attributs:
+        - Graph graph 
+        - Node origin 
+        - List<Arc> arcs
+    Methodes:
+        - Path createFastestPathFromNodes
+        - Path createShortestPathFromNodes
+        - Path concatenate
+        - Graph getGraph
+        - Node getOrigin
+        - Node getDestination
+        - List<Arc>* getArcs
+        - boolean isEmpty
+        - int size
+        - boolean isValid
+        - float getLength 
+        - double getTravelTime 
+        - double getMinimumTravelTime 
+
+Graph:
+    Attributs:
+        - String mapId
+        - String mapName
+        - List<Node> nodes
+        - GraphStatistics graphStatistics 
+    Methodes:
+        - GraphStatistics getGraphInformation
+        - Node get
+        - int size 
+        - List<Node> getNodes
+        - String getMapId
+        - String getMapName
+        - Graph transpose
+        - String toString
