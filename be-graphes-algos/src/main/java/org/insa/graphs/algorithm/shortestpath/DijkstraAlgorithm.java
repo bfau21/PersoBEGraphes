@@ -35,10 +35,12 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         //ITERATIONS
         int idDestination = data.getDestination().getId();
         Label labelDestination = Labels.get(idDestination);
+        System.out.println(idDestination);
         while (!labelDestination.getMarque() && !tas.isEmpty())
         {
             Label labelX = tas.findMin();
             labelX.setMarque(true);
+            tas.deleteMin();
             for (int i = 0; i < labelX.getSommetCourant().getNumberOfSuccessors(); i++)
             {
                 int idLabelY = labelX.getSommetCourant().getSuccessors().get(i).getDestination().getId();
@@ -60,20 +62,14 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
                 }
             }
         }
-
-
-
+        
         // Destination has no predecessor, the solution is infeasible...
-        System.out .println(Labels.get(data.getDestination().getId()).getFather());
-
         if (Labels.get(data.getDestination().getId()).getFather() == null) {
             solution = new ShortestPathSolution(data, Status.INFEASIBLE);
         }
         else {
-            System.out .println("rentre");
             // The destination has been found, notify the observers.
             notifyDestinationReached(data.getDestination());
-
             // Create the path from the array of predecessors...
             ArrayList<Arc> arcs = new ArrayList<>();
             Arc arc = Labels.get(data.getDestination().getId()).getFather();
@@ -81,10 +77,8 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
                 arcs.add(arc);
                 arc = Labels.get(arc.getOrigin().getId()).getFather();
             }
-
             // Reverse the path...
             Collections.reverse(arcs);
-
             // Create the final solution.
             solution = new ShortestPathSolution(data, Status.OPTIMAL, new Path(data.getGraph(), arcs));
         }
