@@ -4,7 +4,7 @@ import java.util.*;
 import org.insa.graphs.model.*;
 import org.insa.graphs.algorithm.AbstractSolution.Status;
 import org.insa.graphs.algorithm.utils.BinaryHeap;
-import org.insa.graphs.model.Graph;
+
 
 public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 
@@ -55,7 +55,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
                     if (coutRealiseMAJ)
                     {
                         tas.insert(labelY);
-                        labelY.setFather(labelX.getFather());
+                        labelY.setFather(labelX.getSommetCourant().getSuccessors().get(i));
                     }
                 }
             }
@@ -64,11 +64,13 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 
 
         // Destination has no predecessor, the solution is infeasible...
-        if (Labels.get(data.getDestination().getId()) == null) {
+        System.out .println(Labels.get(data.getDestination().getId()).getFather());
+
+        if (Labels.get(data.getDestination().getId()).getFather() == null) {
             solution = new ShortestPathSolution(data, Status.INFEASIBLE);
         }
         else {
-
+            System.out .println("rentre");
             // The destination has been found, notify the observers.
             notifyDestinationReached(data.getDestination());
 
