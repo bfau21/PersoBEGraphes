@@ -31,16 +31,16 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         int idOrigin = nodeOrigin.getId();
         Labels.get(idOrigin).setCoutRealise(0);
         tas.insert(Labels.get(idOrigin));
-
+        notifyOriginProcessed(nodeOrigin);
         //ITERATIONS
         int idDestination = data.getDestination().getId();
         Label labelDestination = Labels.get(idDestination);
-        System.out.println(idDestination);
         while (!labelDestination.getMarque() && !tas.isEmpty())
         {
             Label labelX = tas.findMin();
             labelX.setMarque(true);
-            tas.deleteMin();
+            notifyNodeMarked(labelX.getSommetCourant());
+            tas.remove(labelX);
             for (int i = 0; i < labelX.getSommetCourant().getNumberOfSuccessors(); i++)
             {
                 int idLabelY = labelX.getSommetCourant().getSuccessors().get(i).getDestination().getId();
@@ -53,6 +53,14 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
                     {
                         coutRealiseMAJ = true;
                     }
+                    if (labelY.getCoutRealise() == Double.POSITIVE_INFINITY)
+                    {
+                        notifyNodeReached(labelY.getSommetCourant());
+                    }
+                    if (labelY == labelDestination)
+                    {
+                        notifyDestinationReached(data.getDestination());
+                    }
                     labelY.setCoutRealise(Math.min(labelY.getCoutRealise(), labelX.getCoutRealise() + longXY));
                     if (coutRealiseMAJ)
                     {
@@ -62,7 +70,6 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
                 }
             }
         }
-        
         // Destination has no predecessor, the solution is infeasible...
         if (Labels.get(data.getDestination().getId()).getFather() == null) {
             solution = new ShortestPathSolution(data, Status.INFEASIBLE);
