@@ -1,5 +1,7 @@
 package org.insa.graphs.algorithm.shortestpath;
+
 import org.insa.graphs.model.* ;
+
 public class Label implements Comparable<Label>{
     protected final Node sommetCourant;
     protected boolean marque;
@@ -33,6 +35,10 @@ public class Label implements Comparable<Label>{
     {
         return this.coutRealise;
     }
+    public double getTotalCost()
+    {
+        return this.coutRealise;
+    }
     public void setMarque(boolean marque)
     {
         this.marque = marque;
@@ -47,17 +53,35 @@ public class Label implements Comparable<Label>{
     }
     public int compareTo(Label lab)
     {
-        if(this.coutRealise-lab.coutRealise<0)
+        if(this.getTotalCost()-lab.getTotalCost()<0)
         {
             return -1;
         }
-        else if(this.coutRealise-lab.coutRealise>0)
+        else if(this.getTotalCost()-lab.getTotalCost()>0)
         {
             return 1;
         }
         else
         {
-            return 0;
+            if (this.getTotalCost() == this.getCoutRealise())
+            {
+                return 0;
+            }
+            else
+            {
+                if (this.getCoutRealise() - lab.getCoutRealise() < 0)
+                {
+                    return 1;
+                }
+                else if (this.getCoutRealise() - lab.getCoutRealise() > 0)
+                {
+                    return -1;
+                }
+                else 
+                {
+                    return 0; //impossible car si coutR egaux alors totalCost differents. (mis pour eviter une erreur)
+                }
+            }
         }
     }
 }
