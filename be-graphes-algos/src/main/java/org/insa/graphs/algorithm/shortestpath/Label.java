@@ -79,7 +79,7 @@ public class Label implements Comparable<Label>{
                 }
                 else 
                 {
-                    return 0; //impossible car si coutR egaux alors totalCost differents. (mis pour eviter une erreur)
+                    return 0; 
                 }
             }
         }

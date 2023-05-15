@@ -1,0 +1,80 @@
+origine = O;
+distance = 0;
+path = vide;
+sommet_courant = origine;
+boolean rentrer = false;
+while (distance != 42,195 km)
+{
+    if (!rentrer)
+    {
+        trouver tous les points de l'isochrone à 2km
+        boolean refaire = true;
+        while (refaire)
+        {
+            sommet_choisi = en choisir un au hasard
+            djikstra du sommet_courant à sommet_choisi
+            if (distance_djikstra de sommet_courant à sommet_choisi < 4km)
+            {
+                path update;
+                sommet_courant = sommet_choisi;
+                distance += distance_disktra;
+                if (dijkstra de sommet_choisi à origine == (42,195 -distance)+-500m)
+                {
+                    rentrer = true;
+                }
+                refaire = false;
+            }
+        }
+    }
+    else
+    {
+        faire Dijkstra3 de sommetCourant à origine et s'arreter quand dist = 42195
+        prendre le sommet ou ca fait 42,195 km;
+        distance += distance calculee
+        parcours += chemin
+        sommet_courant = sommet_destination,
+    }
+}
+
+
+
+
+
+
+
+
+
+
+origine = O;
+distance = 0;
+parcours = vide;
+sommet_courant = origine;
+boolean rentrer = false;
+while (distance != 42,195 km)
+{
+    if (!rentrer)
+    {
+        trouver tous les points de l'isochrone à 2km
+        boolean refaire = true;
+        while (refaire)
+        {
+            sommet_choisi = en choisir un au hasard
+            djikstra du sommet_courant à sommet_choisi
+            if (distance_djikstra de sommet_courant à sommet_choisi < 4km)
+            {
+                if (Point.distance(origine, sommet_choisi) > 20km) //OU: while (dijkstra de sommet_choisi à origine != (42,195 -distance)+-500m) 
+                {
+                    rentrer = true;
+                }
+                refaire = false;
+            }
+        }
+        parcours = parcours + arc;
+        sommet_courant = sommet_choisi;
+        distance += distance_disktra;
+    }
+    else
+    {
+        il faut rentrer;
+    }
+}

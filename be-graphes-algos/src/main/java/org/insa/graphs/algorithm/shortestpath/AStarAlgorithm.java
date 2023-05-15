@@ -39,29 +39,39 @@ public class AStarAlgorithm extends DijkstraAlgorithm {
             tas.remove(labelX);
             for (int i = 0; i < labelX.getSommetCourant().getNumberOfSuccessors(); i++)
             {
-                int idLabelY = labelX.getSommetCourant().getSuccessors().get(i).getDestination().getId();
-                LabelStar labelY = Labels.get(idLabelY);
-                float longXY = labelX.getSommetCourant().getSuccessors().get(i).getLength();
-                if (!labelY.getMarque())
+                if(data.isAllowed(labelX.getSommetCourant().getSuccessors().get(i)))
                 {
-                    boolean coutRealiseMAJ = false;
-                    if (labelY.getCoutRealise() > labelX.getCoutRealise() + longXY)
+                    int idLabelY = labelX.getSommetCourant().getSuccessors().get(i).getDestination().getId();
+                    LabelStar labelY = Labels.get(idLabelY);
+                    float longXY = labelX.getSommetCourant().getSuccessors().get(i).getLength();
+                    if (!labelY.getMarque())
                     {
-                        coutRealiseMAJ = true;
-                    }
-                    if (labelY.getCoutRealise() == Double.POSITIVE_INFINITY)
-                    {
-                        notifyNodeReached(labelY.getSommetCourant());
-                    }
-                    if (labelY == labelDestination)
-                    {
-                        notifyDestinationReached(data.getDestination());
-                    }
-                    labelY.setCoutRealise(Math.min(labelY.getCoutRealise(), labelX.getCoutRealise() + longXY));
-                    if (coutRealiseMAJ)
-                    {
-                        tas.insert(labelY);
-                        labelY.setFather(labelX.getSommetCourant().getSuccessors().get(i));
+                        boolean remove = true;
+                        if (labelY == labelDestination)
+                        {
+                            notifyDestinationReached(data.getDestination());
+                        }
+                        if (labelY.getCoutRealise() == Double.POSITIVE_INFINITY)
+                        {
+                            remove = false;
+                            notifyNodeReached(labelY.getSommetCourant());
+                        }
+                        if (labelY.getCoutRealise() > labelX.getCoutRealise() + longXY)
+                        {
+                            if (remove)
+                            {
+                                tas.remove(labelY);
+                                labelY.setCoutRealise(labelX.getCoutRealise() + longXY);
+                                labelY.setFather(labelX.getSommetCourant().getSuccessors().get(i));
+                                tas.insert(labelY);
+                            }
+                            else
+                            {
+                                labelY.setCoutRealise(labelX.getCoutRealise() + longXY);
+                                labelY.setFather(labelX.getSommetCourant().getSuccessors().get(i));
+                                tas.insert(labelY);
+                            }
+                        }
                     }
                 }
             }
