@@ -76,34 +76,6 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
                                 tas.insert(labelY);
                             }
                         }
-
-                        /*
-                        boolean coutRealiseMAJ = false;
-                        boolean remove = true;
-                        if (labelY.getCoutRealise() > labelX.getCoutRealise() + longXY)
-                        {
-                            coutRealiseMAJ = true;
-                        }
-                        if (labelY.getCoutRealise() == Double.POSITIVE_INFINITY)
-                        {
-                            remove = false;
-                            notifyNodeReached(labelY.getSommetCourant());
-                        }
-                        if (labelY == labelDestination)
-                        {
-                            notifyDestinationReached(data.getDestination());
-                        }
-                        if (coutRealiseMAJ)
-                        {
-                            if (remove)
-                            {
-                                tas.remove(labelY);
-                            }
-                            labelY.setCoutRealise(Math.min(labelY.getCoutRealise(), labelX.getCoutRealise() + longXY));
-                            tas.insert(labelY);
-                            labelY.setFather(labelX.getSommetCourant().getSuccessors().get(i));
-                        }
-                        */
                     }
                 }
             }

@@ -78,3 +78,18 @@ while (distance != 42,195 km)
         il faut rentrer;
     }
 }
+
+- sommet courant = origine
+- sommet precedent = null;
+if (sommet precedent == null)
+{
+    - sommet choisi = chercher un sommets à vol d'oiseau de 4km de sommet courant 
+    - faire dijkstra de sommet courant à sommet_choisi
+}
+else
+{
+    - sommet choisi = chercher un sommets à vol d'oiseau de 4km de sommet courant et à vol d'oiseau > 4km de sommet precedent
+    - faire dijkstra de sommet courant à sommet_choisi
+}
+- ajouter pathDijkstra au pathGlobal
+if ()
